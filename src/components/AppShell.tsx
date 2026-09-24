@@ -43,7 +43,7 @@ export default function AppShell({ children }) {
           <SidebarItem icon={Settings} label="Settings" href="/settings" />
         </nav>
 
-        <div className="mt-auto p-4 glass-card bg-white/5">
+        <div className="mt-auto p-4 bg-[#161616] bg-opacity-60 backdrop-blur-md border border-white/10 rounded-2xl">
           <p className="text-xs text-gray-500 mb-2">System Status</p>
           <div className="flex items-center gap-2 text-sm">
             <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />

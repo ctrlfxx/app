@@ -54,7 +54,7 @@ export default function EditorManager() {
       </div>
 
       <div className="grid grid-cols-1 gap-6">
-        <div className="glass-card overflow-hidden">
+        <div className="bg-[#161616] bg-opacity-60 backdrop-blur-md border border-white/10 rounded-2xl overflow-hidden">
           <table className="w-full text-left border-collapse">
             <thead className="bg-white/[0.03]">
               <tr className="border-b border-white/10">

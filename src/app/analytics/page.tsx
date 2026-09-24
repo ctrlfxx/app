@@ -6,7 +6,7 @@ import {
   ArrowDownRight, 
   Award, 
   Activity,
-  Instagram
+  Camera
 } from 'lucide-react';
 import { 
   AreaChart, 
@@ -60,7 +60,7 @@ export default function AnalyticsPage() {
       <div className="flex justify-between items-center mb-8">
         <div className="flex items-center gap-4">
           <div className="p-3 rounded-2xl bg-gradient-to-br from-pink-500 to-purple-600 shadow-lg">
-            <Instagram size={24} className="text-white" />
+            <Camera size={24} className="text-white" />
           </div>
           <div>
             <h1 className="text-3xl font-bold">Social Intelligence</h1>
@@ -75,7 +75,7 @@ export default function AnalyticsPage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-        <div className="lg:col-span-2 glass-card p-8">
+        <div className="lg:col-span-2 bg-[#161616] bg-opacity-60 backdrop-blur-md border border-white/10 rounded-2xl p-8">
           <div className="flex justify-between items-center mb-8">
             <h3 className="text-xl font-bold">Growth Comparison</h3>
             <div className="flex gap-4 text-xs font-medium">
@@ -117,7 +117,7 @@ export default function AnalyticsPage() {
           </div>
         </div>
 
-        <div className="glass-card p-8">
+        <div className="bg-[#161616] bg-opacity-60 backdrop-blur-md border border-white/10 rounded-2xl p-8">
           <div className="flex items-center gap-2 mb-6">
             <Award size={20} className="text-yellow-500" />
             <h3 className="text-xl font-bold">Viral Winners</h3>
