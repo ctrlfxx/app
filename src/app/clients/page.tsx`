@@ -1,0 +1,170 @@
+import React from 'react';
+import AppShell from '@/components/AppShell';
+import { 
+  Plus, 
+  Search, 
+  ExternalLink, 
+  MoreVertical, 
+  Palette, 
+  Zap,
+  CheckCircle2,
+  Circle
+} from 'lucide-react';
+
+const MOCK_CLIENTS = [
+  {
+    id: '1',
+    name: 'Alex Hormozi',
+    niche: 'Business/Acquisition',
+    plan: 'Enterprise',
+    status: 'Completed',
+    pacing: 'High-energy',
+    palette: ['#FF0000', '#FFFFFF', '#000000'],
+    hub: 'https://drive.google.com/hrmozi',
+    guidelines: { fonts: 'Inter', style: 'Aggressive Captions', bRoll: 'High' }
+  },
+  {
+    id: '2',
+    name: 'MrBeast',
+    niche: 'Entertainment',
+    plan: 'Enterprise',
+    status: 'Completed',
+    pacing: 'Extreme-energy',
+    palette: ['#00BFFF', '#FFD700', '#FFFFFF'],
+    hub: 'https://drive.google.com/mrbeast',
+    guidelines: { fonts: 'Komika Axis', style: 'Fast-paced', bRoll: 'Extreme' }
+  },
+  {
+    id: '3',
+    name: 'Iman Gadzhi',
+    niche: 'Wealth/Lifestyle',
+    plan: 'Pro',
+    status: 'Pending',
+    pacing: 'Cinematic',
+    palette: ['#D4AF37', '#000000', '#FFFFFF'],
+    hub: 'https://drive.google.com/imagadzhi',
+    guidelines: { fonts: 'Playfair Display', style: 'Elegant', bRoll: 'Atmospheric' }
+  },
+  {
+    id: '4',
+    name: 'Ali Abdaal',
+    niche: 'Productivity',
+    plan: 'Pro',
+    status: 'Completed',
+    pacing: 'Educational',
+    palette: ['#FFFFFF', '#F3F4F6', '#4B5563'],
+    hub: 'https://drive.google.com/aliabdaal',
+    guidelines: { fonts: 'Inter', style: 'Clean/Minimal', bRoll: 'Moderate' }
+  },
+];
+
+export default function ClientCRM() {
+  return (
+    <AppShell>
+      <div className="flex justify-between items-center mb-8">
+        <div>
+          <h1 className="text-3xl font-bold">Client CRM</h1>
+          <p className="text-gray-400">Manage brand identities and asset hubs</p>
+        </div>
+        <button className="btn-primary flex items-center gap-2">
+          <Plus size={20} />
+          Add Client
+        </button>
+      </div>
+
+      <div className="flex gap-4 mb-8">
+        <div className="relative flex-1">
+          <Search className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
+          <input 
+            type="text" 
+            placeholder="Search clients, niches, or plans..." 
+            className="w-full bg-white/5 border border-white/10 rounded-xl py-2 pl-10 pr-4 focus:outline-none focus:border-[#9333ea] transition-all"
+          />
+        </div>
+      </div>
+
+      <div className="grid grid-cols-1 xl:grid-cols-2 gap-6">
+        {MOCK_CLIENTS.map((client) => (
+          <div key={client.id} className="glass-card p-6 group hover:border-white/20 transition-all duration-300">
+            <div className="flex justify-between items-start mb-6">
+              <div className="flex items-center gap-4">
+                <div className="w-12 h-12 rounded-full bg-gradient-to-br from-gray-700 to-gray-900 border border-white/20 flex items-center justify-center font-bold text-lg">
+                  {client.name.charAt(0)}
+                </div>
+                <div>
+                  <h3 className="text-xl font-bold group-hover:text-[#9333ea] transition-colors">{client.name}</h3>
+                  <span className="text-xs text-gray-500 font-medium">{client.niche}</span>
+                </div>
+              </div>
+              <div className="flex items-center gap-2">
+                <span className={`text-[10px] px-2 py-1 rounded-full font-bold uppercase tracking-wider ${
+                  client.plan === 'Enterprise' ? 'bg-purple-500/20 text-purple-400' : 'bg-blue-500/20 text-blue-400'
+                }`}>
+                  {client.plan}
+                </span>
+                <button className="p-2 text-gray-500 hover:text-white transition-colors">
+                  <MoreVertical size={18} />
+                </button>
+              </div>
+            </div>
+
+            <div className="grid grid-cols-2 gap-6 mb-6">
+              <div className="space-y-3">
+                <div className="flex items-center gap-2 text-xs text-gray-400">
+                  <Zap size={14} className="text-[#9333ea]" />
+                  <span>Pacing</span>
+                </div>
+                <p className="text-sm font-medium">{client.pacing}</p>
+              </div>
+              <div className="space-y-3">
+                <div className="flex items-center gap-2 text-xs text-gray-400">
+                  <CheckCircle2 size={14} className="text-green-500" />
+                  <span>Onboarding</span>
+                </div>
+                <p className="text-sm font-medium flex items-center gap-1">
+                  {client.status === 'Completed' ? (
+                    <span className="text-green-400">Completed</span>
+                  ) : (
+                    <span className="text-yellow-400">Pending</span>
+                  )}
+                </p>
+              </div>
+            </div>
+
+            <div className="mb-6">
+              <div className="flex items-center gap-2 text-xs text-gray-400 mb-3">
+                <Palette size={14} className="text-[#9333ea]" />
+                <span>Brand Palette</span>
+              </div>
+              <div className="flex gap-2">
+                {client.palette.map((color, i) => (
+                  <div 
+                    key={i} 
+                    className="w-8 h-8 rounded-lg border border-white/10 cursor-pointer hover:scale-110 transition-transform" 
+                    style={{ backgroundColor: color }}
+                    title={color}
+                  />
+                ))}
+              </div>
+            </div>
+
+            <div className="flex items-center justify-between pt-6 border-t border-white/5">
+              <a 
+                href={client.hub} 
+                target="_blank" 
+                rel="noopener noreferrer"
+                className="flex items-center gap-2 text-sm text-gray-400 hover:text-white transition-colors"
+              >
+                <ExternalLink size={14} />
+                Asset Hub
+              </a>
+              <button className="text-xs font-bold text-[#9333ea] hover:underline">
+                Edit Voice Matrix →
+              </button>
+            </div>
+          </div>
+        ))}
+      </div>
+    </AppShell>
+  );
+}
