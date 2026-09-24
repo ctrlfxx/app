@@ -1,22 +1,28 @@
 import React from 'react';
 import AppShell from '@/components/AppShell';
-import { 
-  TrendingUp, 
-  Clock, 
-  CheckCircle, 
+import {
+  TrendingUp,
+  Clock,
+  CheckCircle,
   DollarSign,
   AlertCircle
 } from 'lucide-react';
-import { 
-  BarChart, 
-  Bar, 
-  XAxis, 
-  YAxis, 
-  CartesianGrid, 
-  Tooltip, 
+import {
+  BarChart,
+  Bar,
+  XAxis,
+  YAxis,
+  CartesianGrid,
+  Tooltip,
   ResponsiveContainer,
   Cell
 } from 'recharts';
+
+const Video = ({ size = 20, className = "" }) => (
+  <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
+    <path d="m22 8-6 4 6 4V8Z"/><rect width="14" height="12" x="2" y="6" rx="2"/>
+  </svg>
+);
 
 const KPI_DATA = [
   { label: 'Active Projects', value: '24', icon: Video, color: '#9333ea' },
@@ -24,7 +30,6 @@ const KPI_DATA = [
   { label: 'Avg Turnaround', value: '42h', icon: Clock, color: '#f59e0b' },
   { label: 'Client Satisfaction', value: '98%', icon: CheckCircle, color: '#3b82f6' },
 ];
-
 const RECENT_TASKS = [
   { client: 'Alex Hormozi', type: 'Ad', editor: 'Sarah K.', deadline: '2h left', priority: 'Critical' },
   { client: 'MrBeast', type: 'Organic', editor: 'Mike J.', deadline: '5h left', priority: 'High' },
