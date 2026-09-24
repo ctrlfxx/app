@@ -1,5 +1,8 @@
+"use client";
+
 import React, { useState } from 'react';
 import AppShell from '@/components/AppShell';
+import { motion, AnimatePresence } from 'framer-motion';
 import { 
   MoreHorizontal, 
   GripVertical, 
@@ -7,7 +10,9 @@ import {
   AlertCircle, 
   Clock,
   Filter,
-  Search
+  Search,
+  Plus,
+  X
 } from 'lucide-react';
 
 const COLUMNS = [
@@ -18,7 +23,7 @@ const COLUMNS = [
   { id: 'scheduled', title: 'Scheduled', color: 'bg-purple-500' },
 ];
 
-const MOCK_PROJECTS = [
+const INITIAL_PROJECTS = [
   { 
     id: 'p1', 
     title: 'Hormozi Acquisition Hook', 
@@ -71,11 +76,17 @@ const MOCK_PROJECTS = [
   },
 ];
 
-const ProjectCard = ({ project }) => {
+const ProjectCard = ({ project, onQCChange }) => {
   const isAd = project.type === 'Ad';
   
   return (
-    <div className="glass-card p-4 mb-4 group hover:border-white/30 transition-all cursor-grab active:cursor-grabbing relative">
+    <motion.div 
+      layout
+      initial={{ opacity: 0, y: 10 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      className="glass-card p-4 mb-4 group hover:border-white/30 transition-all cursor-grab active:cursor-grabbing relative"
+    >
       <div className="flex justify-between items-start mb-3">
         <div className="flex items-center gap-2">
           <div className={`w-2 h-2 rounded-full ${isAd ? 'bg-blue-400' : 'bg-purple-500'}`} />
@@ -102,10 +113,17 @@ const ProjectCard = ({ project }) => {
         </div>
         <div className="flex items-center gap-2">
           {project.status === 'internal-review' && (
-            <div className="flex gap-1">
-              <div className={`w-1.5 h-1.5 rounded-full ${project.qc.audio ? 'bg-green-500' : 'bg-gray-600'}`} />
-              <div className={`w-1.5 h-1.5 rounded-full ${project.qc.caption ? 'bg-green-500' : 'bg-gray-600'}`} />
-              <div className={`w-1.5 h-1.5 rounded-full ${project.qc.hook ? 'bg-green-500' : 'bg-gray-600'}`} />
+            <div className="flex gap-1.5">
+              {['audio', 'caption', 'hook'].map((check) => (
+                <button 
+                  key={check}
+                  onClick={() => onQCChange(project.id, check)}
+                  className={`w-2 h-2 rounded-full transition-all duration-200 ${
+                    project.qc[check] ? 'bg-green-500 shadow-[0_0_5px_rgba(34,197,94,0.6)]' : 'bg-gray-600 hover:bg-gray-400'
+                  }`}
+                  title={`QC ${check}`}
+                />
+              ))}
             </div>
           )}
           <span className={`text-[10px] font-bold ${
@@ -115,19 +133,29 @@ const ProjectCard = ({ project }) => {
           </span>
         </div>
       </div>
-    </div>
+    </motion.div>
   );
 };
 
 export default function PipelineBoard() {
-  const [projects] = useState(MOCK_PROJECTS);
+  const [projects, setProjects] = useState(INITIAL_PROJECTS);
+
+  const handleQCChange = (projectId, check) => {
+    setProjects(prev => prev.map(p => 
+      p.id === projectId 
+        ? { ...p, qc: { ...p.qc, [check]: !p.qc[check] } } 
+        : p
+    ));
+  };
 
   return (
     <AppShell>
       <div className="flex justify-between items-center mb-8">
-        <div>
-          <h1 className="text-3xl font-bold">Content Pipeline</h1>
-          <p className="text-gray-400">Manage production flow from raw to scheduled</p>
+        <div className="flex items-center gap-4">
+          <div>
+            <h1 className="text-3xl font-bold">Content Pipeline</h1>
+            <p className="text-gray-400">Manage production flow from raw to scheduled</p>
+          </div>
         </div>
         <div className="flex gap-3">
           <div className="relative">
@@ -164,12 +192,18 @@ export default function PipelineBoard() {
             </div>
 
             <div className="min-h-[calc(100vh-250px)] bg-white/[0.02] rounded-2xl p-2 border border-white/5">
-              {projects
-                .filter(p => p.status === col.id)
-                .map(project => (
-                  <ProjectCard key={project.id} project={project} />
-                ))
-              }
+              <AnimatePresence>
+                {projects
+                  .filter(p => p.status === col.id)
+                  .map(project => (
+                    <ProjectCard 
+                      key={project.id} 
+                      project={project} 
+                      onQCChange={handleQCChange} 
+                    />
+                  ))
+                }
+              </AnimatePresence>
               {projects.filter(p => p.status === col.id).length === 0 && (
                 <div className="h-full flex flex-col items-center justify-center text-center p-8 opacity-20">
                   <div className="w-12 h-12 rounded-full border-2 border-dashed border-gray-500 mb-2 flex items-center justify-center">
@@ -183,15 +217,5 @@ export default function PipelineBoard() {
         ))}
       </div>
     </AppShell>
-  );
-}
-
-// Helper component for the plus icon since I used it in the JSX
-function Plus({ size = 20, className = "" }) {
-  return (
-    <svg xmlns="http://www.w3.org/2000/svg" width={size} height={size} viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className={className}>
-      <line x1="12" y1="5" x2="12" y2="19"></line>
-      <line x1="5" y1="12" x2="19" y2="12"></line>
-    </svg>
   );
 }
