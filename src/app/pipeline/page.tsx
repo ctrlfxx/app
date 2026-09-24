@@ -85,7 +85,7 @@ const ProjectCard = ({ project, onQCChange }) => {
       initial={{ opacity: 0, y: 10 }}
       animate={{ opacity: 1, y: 0 }}
       exit={{ opacity: 0, scale: 0.95 }}
-      className="bg-[#161616] bg-opacity-60 backdrop-blur-md border border-white/10 rounded-2xl p-4 mb-4 group hover:border-white/30 transition-all cursor-grab active:cursor-grabbing relative"
+      className="glass-card p-4 mb-4 group hover:border-white/30 transition-all cursor-grab active:cursor-grabbing relative"
     >
       <div className="flex justify-between items-start mb-3">
         <div className="flex items-center gap-2">

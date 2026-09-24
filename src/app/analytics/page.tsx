@@ -75,7 +75,7 @@ export default function AnalyticsPage() {
       </div>
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 mb-8">
-        <div className="lg:col-span-2 bg-[#161616] bg-opacity-60 backdrop-blur-md border border-white/10 rounded-2xl p-8">
+        <div className="lg:col-span-2 glass-card p-8">
           <div className="flex justify-between items-center mb-8">
             <h3 className="text-xl font-bold">Growth Comparison</h3>
             <div className="flex gap-4 text-xs font-medium">
@@ -117,7 +117,7 @@ export default function AnalyticsPage() {
           </div>
         </div>
 
-        <div className="bg-[#161616] bg-opacity-60 backdrop-blur-md border border-white/10 rounded-2xl p-8">
+        <div className="glass-card p-8">
           <div className="flex items-center gap-2 mb-6">
             <Award size={20} className="text-yellow-500" />
             <h3 className="text-xl font-bold">Viral Winners</h3>

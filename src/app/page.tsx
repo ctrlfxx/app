@@ -43,7 +43,7 @@ export default function Dashboard() {
     <AppShell>
       <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 mb-8">
         {KPI_DATA.map((kpi, i) => (
-          <div key={i} className="bg-[#161616] bg-opacity-60 backdrop-blur-md border border-white/10 rounded-2xl p-6 flex items-center gap-4 relative overflow-hidden group">
+          <div key={i} className="glass-card p-6 flex items-center gap-4 relative overflow-hidden group">
             <div className="p-3 rounded-2xl bg-white/5 text-white group-hover:scale-110 transition-transform">
               <kpi.icon size={24} style={{ color: kpi.color }} />
             </div>
@@ -61,7 +61,7 @@ export default function Dashboard() {
 
       <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
         {/* Goal Engine */}
-        <div className="lg:col-span-2 bg-[#161616] bg-opacity-60 backdrop-blur-md border border-white/10 rounded-2xl p-8">
+        <div className="lg:col-span-2 glass-card p-8">
           <div className="flex justify-between items-center mb-6">
             <div>
               <h3 className="text-xl font-bold mb-1">Monthly Goal Engine</h3>
@@ -86,7 +86,7 @@ export default function Dashboard() {
         </div>
 
         {/* Urgent Tasks */}
-        <div className="bg-[#161616] bg-opacity-60 backdrop-blur-md border border-white/10 rounded-2xl p-6">
+        <div className="glass-card p-6">
           <div className="flex items-center gap-2 mb-6">
             <AlertCircle size={20} className="text-red-500" />
             <h3 className="text-lg font-bold">Urgent Deadlines</h3>
